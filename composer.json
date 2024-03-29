@@ -64,8 +64,16 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+        },
+        "classmap": [
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        },
+            "files": [
+            "app/Helpers/Helper.php"
+        ]
+        },
+        "minimum-stability": "stable",
+        "prefer-stable": true
 }
