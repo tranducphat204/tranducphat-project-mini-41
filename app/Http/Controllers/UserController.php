@@ -14,11 +14,27 @@ class UserController extends Controller
     {
         $this->users = new Users();
     }
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Danh sách người dùng';
-        $this->users->learnQueryBuiler();
-        $userList = $this->users->getAllUser();
+        // $this->users->learnQueryBuiler();
+        $filter = [];
+        if (!empty($request->status)) {
+            $status = $request->status;
+            if ($status == "active") {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+            $filter[] = ['users.status', '=', $status];
+        }
+
+        if (!empty($request->group_id)) {
+            $groupId = $request->group_id;
+
+            $filter[] = ['users.group_id', '=', $$groupId];
+        }
+        $userList = $this->users->getAllUser($filter);
         return view('client.users.lists', compact('title', 'userList'));
     }
     public function add()
